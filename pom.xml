@@ -1,9 +1,11 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <groupId>edu.ucsd.msgf</groupId>
-    <artifactId>MSGFPlus</artifactId>
+    <groupId>omics</groupId>
+    <artifactId>omics-msgf</artifactId>
     <version>1.0.0-SNAPSHOT</version>
-    <name>MSGF-Plus</name>
+    <name>msgfplus-glycan</name>
+
     <properties>
         <skipTests>true</skipTests>
     </properties>
@@ -81,7 +83,8 @@
                             <!-- <finalName>${project.artifactId}-${project.version}-jar-w-reduced-deps</finalName> -->
                             <finalName>${project.artifactId}</finalName>
                             <transformers>
-                                <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+                                <transformer
+                                        implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
                                     <mainClass>edu.ucsd.msjava.ui.MSGFPlus</mainClass>
                                 </transformer>
                             </transformers>
@@ -103,7 +106,8 @@
                                         <include>it/unimi/dsi/fastutil/booleans/BooleanArrays**</include>
                                         <include>it/unimi/dsi/fastutil/booleans/BooleanComparator**</include>
                                         <!-- chars -->
-                                        <include>it/unimi/dsi/fastutil/chars/AbstractCharBidirectionalIterator**</include>
+                                        <include>it/unimi/dsi/fastutil/chars/AbstractCharBidirectionalIterator**
+                                        </include>
                                         <include>it/unimi/dsi/fastutil/chars/AbstractCharCollection**</include>
                                         <include>it/unimi/dsi/fastutil/chars/AbstractCharIterator**</include>
                                         <include>it/unimi/dsi/fastutil/chars/AbstractCharList**</include>
@@ -126,7 +130,8 @@
                                         <include>it/unimi/dsi/fastutil/ints/IntArrays**</include>
                                         <include>it/unimi/dsi/fastutil/ints/IntComparator**</include>
                                         <!-- objects -->
-                                        <include>it/unimi/dsi/fastutil/objects/AbstractObjectBidirectionalIterator**</include>
+                                        <include>it/unimi/dsi/fastutil/objects/AbstractObjectBidirectionalIterator**
+                                        </include>
                                         <include>it/unimi/dsi/fastutil/objects/AbstractObjectCollection**</include>
                                         <include>it/unimi/dsi/fastutil/objects/AbstractObjectIterator**</include>
                                         <include>it/unimi/dsi/fastutil/objects/AbstractObjectList**</include>
@@ -208,8 +213,13 @@
             <artifactId>activation</artifactId>
             <version>1.0.2</version>
         </dependency>
+        <dependency>
+            <groupId>omics</groupId>
+            <artifactId>omics-pdk</artifactId>
+            <version>RELEASE</version>
+        </dependency>
     </dependencies>
-  
+
     <repositories>
         <repository>
             <id>nexus-ebi-release-repo</id>
@@ -221,7 +231,7 @@
             <name>The internal repository</name>
             <url>file:${project.basedir}/repo</url>
         </repository>
-    </repositories>  
+    </repositories>
     <organization>
         <name>Center for Computational Mass Spectrometry, University of California, San Diego</name>
         <url>http://proteomics.ucsd.edu</url>

@@ -19,15 +19,16 @@ import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-
-public class MSGFPlus {
-    public static final String VERSION = "Release (v2018.04.09)";
+public class MSGFPlus
+{
+    public static final String VERSION = "Release (v2018.06.22)";
     public static final String RELEASE_DATE = "9 April 2018";
 
     public static final String DECOY_DB_EXTENSION = ".revCat.fasta";
     public static final String DECOY_PROTEIN_PREFIX = "XXX";
 
-    public static void main(String argv[]) {
+    public static void main(String argv[])
+    {
         long time = System.currentTimeMillis();
 
         ParamManager paramManager = new ParamManager("MS-GF+", MSGFPlus.VERSION, MSGFPlus.RELEASE_DATE, "java -Xmx3500M -jar MSGFPlus.jar");
@@ -67,7 +68,8 @@ public class MSGFPlus {
             System.out.format("MS-GF+ complete (total elapsed time: %.2f sec)\n", (System.currentTimeMillis() - time) / (float) 1000);
     }
 
-    public static String runMSGFPlus(ParamManager paramManager) {
+    public static String runMSGFPlus(ParamManager paramManager)
+    {
         SearchParams params = new SearchParams();
         String errorMessage = params.parse(paramManager);
         if (errorMessage != null)
@@ -111,7 +113,8 @@ public class MSGFPlus {
         return null;
     }
 
-    private static String runMSGFPlus(int ioIndex, SpecFileFormat specFormat, File outputFile, SearchParams params) {
+    private static String runMSGFPlus(int ioIndex, SpecFileFormat specFormat, File outputFile, SearchParams params)
+    {
         long time = System.currentTimeMillis();
 
         // Check the outputFile is valid for writing
@@ -332,7 +335,7 @@ public class MSGFPlus {
                         resultList,
                         i + 1
                 );
-                    executor.execute(msgfdbExecutor);
+                executor.execute(msgfdbExecutor);
             }
             // Output initial progress report.
             executor.outputProgressReport();
