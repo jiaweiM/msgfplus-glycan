@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>omics</groupId>
     <artifactId>omics-msgf</artifactId>
-    <version>1.0.0-SNAPSHOT</version>
+    <version>1.0.0</version>
     <name>msgfplus-glycan</name>
 
     <properties>
