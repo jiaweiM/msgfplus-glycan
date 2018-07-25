@@ -46,7 +46,7 @@ public abstract class PSMSet
     {
         if (psmList == null)
             return null;
-        ArrayList<Float> psmScores = new ArrayList<Float>();
+        ArrayList<Float> psmScores = new ArrayList<>();
         for (ScoredString ss : psmList)
             psmScores.add(ss.getScore());
         return psmScores;
@@ -56,7 +56,7 @@ public abstract class PSMSet
     {
         if (peptideScoreTable == null)
             return null;
-        ArrayList<Float> pepScores = new ArrayList<Float>();
+        ArrayList<Float> pepScores = new ArrayList<>();
         Iterator<Entry<String, Float>> itr = peptideScoreTable.entrySet().iterator();
         while (itr.hasNext()) {
             Entry<String, Float> entry = itr.next();
@@ -65,7 +65,5 @@ public abstract class PSMSet
         return pepScores;
     }
 
-    //
-//	public abstract void writeResults(TargetDecoyAnalysis tda, PrintStream out, float fdrThreshold, float pepFDRThreshold, float scoreThreshold);
     public abstract void read();
 }

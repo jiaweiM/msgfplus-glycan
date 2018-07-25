@@ -9,7 +9,7 @@ import omics.msgf.params.FileParameter;
 import omics.msgf.params.IntRangeParameter;
 import omics.msgf.params.ParamManager;
 import omics.msgf.params.ToleranceParameter;
-import omics.msgf.sequences.Constants;
+import omics.msgf.sequences.DBConstants;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -227,7 +227,7 @@ public class MSGFDB
         int avgPeptideMass = 2000;
         int numBytesPerMass = 12;
         int numSpecScannedTogether = (int) ((float) maxMemory / avgPeptideMass / numBytesPerMass);
-        ArrayList<SpecKey> specKeyList = SpecKey.getSpecKeyList(specAcc.getSpecItr(), startSpecIndex, endSpecIndex, minCharge, maxCharge, activationMethod, Constants.MIN_NUM_PEAKS_PER_SPECTRUM);
+        ArrayList<SpecKey> specKeyList = SpecKey.getSpecKeyList(specAcc.getSpecItr(), startSpecIndex, endSpecIndex, minCharge, maxCharge, activationMethod, DBConstants.MIN_NUM_PEAKS_PER_SPECTRUM);
         int specSize = specKeyList.size();
 
         System.out.print("Reading spectra finished ");

@@ -2,6 +2,9 @@ package omics.msgf.msgf;
 
 import java.io.Serializable;
 
+/**
+ * Tolerance is a value with unit.
+ */
 public class Tolerance implements Serializable
 { // Serializable is needed in order to make RankScorer serializable
     /**
@@ -22,7 +25,7 @@ public class Tolerance implements Serializable
     public Tolerance(float value, boolean isTolerancePPM)
     {
         this.value = value;
-        if (isTolerancePPM == false)
+        if (!isTolerancePPM)
             unit = Unit.Da;
         else
             unit = Unit.PPM;
@@ -142,6 +145,9 @@ public class Tolerance implements Serializable
             return null;
     }
 
+    /**
+     * Tolerance unit
+     */
     public enum Unit
     {
         Da,

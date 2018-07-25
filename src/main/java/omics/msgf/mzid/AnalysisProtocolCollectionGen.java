@@ -25,8 +25,8 @@ public class AnalysisProtocolCollectionGen
         this.params = params;
         this.aaSet = aaSet;
         analysisProtocolCollection = new AnalysisProtocolCollection();
-        modMap = new HashMap<omics.msgf.msutil.Modification, uk.ac.ebi.jmzidml.model.mzidml.SearchModification>();
-        fixedModMap = new HashMap<String, List<omics.msgf.msutil.Modification>>();
+        modMap = new HashMap<>();
+        fixedModMap = new HashMap<>();
         generateSpectrumIdentificationProtocol();
     }
 

@@ -10,7 +10,6 @@ import java.util.concurrent.*;
  */
 public class ThreadPoolExecutorWithExceptions extends ThreadPoolExecutor
 {
-
     private final ScheduledExecutorService statusExecutor = Executors.newSingleThreadScheduledExecutor();
     private final List<ProgressData> progressObjects;
     private Throwable thrownData;

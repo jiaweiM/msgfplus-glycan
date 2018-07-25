@@ -11,6 +11,7 @@ import omics.msgf.parser.MgfSpectrumParser;
 import omics.msgf.parser.MzXMLSpectraIterator;
 import omics.msgf.parser.PklSpectrumParser;
 import omics.msgf.parser.SpectrumParser;
+import omics.msgf.sequences.DBConstants;
 import omics.msgf.suffixarray.SuffixArray;
 import omics.msgf.suffixarray.SuffixArraySequence;
 
@@ -89,7 +90,7 @@ public class MSDictionary
         {
             if (!new File(dbFileName).exists())
                 printParsingErrorAndExit(dbFileName + " doesn't exist.");
-            sa = new SuffixArray(new SuffixArraySequence(dbFileName, omics.msgf.sequences.Constants.AMINO_ACIDS_19));
+            sa = new SuffixArray(new SuffixArraySequence(dbFileName, DBConstants.AMINO_ACIDS_19));
         }
 
         // Scoring parameters

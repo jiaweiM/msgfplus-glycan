@@ -3,18 +3,18 @@ package msgfplus;
 import java.io.File;
 import java.net.URISyntaxException;
 
-import edu.ucsd.msjava.msdbsearch.SuffixArrayForMSGFDB;
-import edu.ucsd.msjava.msutil.Composition;
+import omics.msgf.msdbsearch.SuffixArrayForMSGFDB;
+import omics.msgf.msutil.Composition;
 import org.junit.Ignore;
 import org.junit.Test;
 
-import edu.ucsd.msjava.msdbsearch.CompactFastaSequence;
-import edu.ucsd.msjava.msdbsearch.DBScanner;
-import edu.ucsd.msjava.msgf.Tolerance;
-import edu.ucsd.msjava.msutil.AminoAcid;
-import edu.ucsd.msjava.msutil.AminoAcidSet;
-import edu.ucsd.msjava.suffixarray.SuffixArray;
-import edu.ucsd.msjava.suffixarray.SuffixArraySequence;
+import omics.msgf.msdbsearch.CompactFastaSequence;
+import omics.msgf.msdbsearch.DBScanner;
+import omics.msgf.msgf.Tolerance;
+import omics.msgf.msutil.AminoAcid;
+import omics.msgf.msutil.AminoAcidSet;
+import omics.msgf.suffixarray.SuffixArray;
+import omics.msgf.suffixarray.SuffixArraySequence;
 
 public class TestSA {
 

@@ -3,6 +3,7 @@ package omics.msgf.misc;
 import omics.msgf.msutil.*;
 import omics.msgf.parser.BufferedLineReader;
 import omics.msgf.parser.MgfSpectrumParser;
+import omics.msgf.sequences.DBConstants;
 import omics.msgf.suffixarray.SuffixArray;
 import omics.msgf.suffixarray.SuffixArraySequence;
 
@@ -343,14 +344,14 @@ public class MiscScripts
     {
         int splitNum = 0;
         String dbFileName = System.getProperty("user.home") + "/Research/Data/HumanGenome/translated/HSRM.NCBI36.54.translation." + splitNum + ".fasta";
-        SuffixArray sa = new SuffixArray(new SuffixArraySequence(dbFileName, omics.msgf.sequences.Constants.AMINO_ACIDS_19));
+        SuffixArray sa = new SuffixArray(new SuffixArraySequence(dbFileName, DBConstants.AMINO_ACIDS_19));
         System.out.println(sa.search("STHQHSENEEFPKL"));
     }
 
     public static void makeMatchedProteinDB() throws Exception
     {
         String dbFileName = System.getProperty("user.home") + "/Research/Data/EColiDB/Ecol_protein_formatted.fasta";
-        SuffixArraySequence adapter = new SuffixArraySequence(dbFileName, omics.msgf.sequences.Constants.AMINO_ACIDS_19);
+        SuffixArraySequence adapter = new SuffixArraySequence(dbFileName, DBConstants.AMINO_ACIDS_19);
         SuffixArray sa = new SuffixArray(adapter);
 
         String specFileName = System.getProperty("user.home") + "/Research/Data/AgilentQTOF/annotatedAgilentQTOF.mgf";

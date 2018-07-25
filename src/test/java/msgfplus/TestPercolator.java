@@ -7,8 +7,8 @@ import java.net.URISyntaxException;
 
 import org.junit.Test;
 
-import edu.ucsd.msjava.params.ParamManager;
-import edu.ucsd.msjava.ui.MSGFPlus;
+import omics.msgf.params.ParamManager;
+import omics.msgf.ui.MSGFPlus;
 
 public class TestPercolator {
 

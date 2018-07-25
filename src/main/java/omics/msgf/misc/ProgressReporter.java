@@ -5,6 +5,9 @@ package omics.msgf.misc;
  */
 public interface ProgressReporter
 {
+    /**
+     * @return current progress
+     */
     ProgressData getProgressData();
 
     void setProgressData(ProgressData data);

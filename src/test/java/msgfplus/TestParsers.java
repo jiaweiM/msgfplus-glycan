@@ -8,9 +8,9 @@ import java.util.Iterator;
 import org.junit.Assert;
 import org.junit.Test;
 
-import edu.ucsd.msjava.misc.ConvertToMgf;
-import edu.ucsd.msjava.msutil.SpectraAccessor;
-import edu.ucsd.msjava.msutil.Spectrum;
+import omics.msgf.misc.ConvertToMgf;
+import omics.msgf.msutil.SpectraAccessor;
+import omics.msgf.msutil.Spectrum;
 
 public class TestParsers {
 

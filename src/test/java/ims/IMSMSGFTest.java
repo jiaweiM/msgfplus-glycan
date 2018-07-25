@@ -5,8 +5,8 @@ import java.io.File;
 import org.junit.Ignore;
 import org.junit.Test;
 
-import edu.ucsd.msjava.params.ParamManager;
-import edu.ucsd.msjava.ui.MSGF;
+import omics.msgf.params.ParamManager;
+import omics.msgf.ui.MSGF;
 
 /**
  * These are all tests from MSGFDB tool.

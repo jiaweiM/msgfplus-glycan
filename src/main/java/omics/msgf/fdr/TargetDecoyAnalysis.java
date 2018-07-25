@@ -6,7 +6,8 @@ import java.util.Iterator;
 import java.util.Map.Entry;
 import java.util.TreeMap;
 
-public class TargetDecoyAnalysis {
+public class TargetDecoyAnalysis
+{
     final PSMSet target;
     final PSMSet decoy;
     final boolean isGreaterBetter;
@@ -15,11 +16,13 @@ public class TargetDecoyAnalysis {
     TreeMap<Float, Float> psmLevelFDRMap;    // PSMScore -> FDR
     TreeMap<Float, Float> pepLevelFDRMap;    // Peptide -> PepFDR
 
-    public TargetDecoyAnalysis(PSMSet target, PSMSet decoy) {
+    public TargetDecoyAnalysis(PSMSet target, PSMSet decoy)
+    {
         this(target, decoy, 1);
     }
 
-    public TargetDecoyAnalysis(PSMSet target, PSMSet decoy, float pit) {
+    public TargetDecoyAnalysis(PSMSet target, PSMSet decoy, float pit)
+    {
         this.target = target;
         this.decoy = decoy;
         this.isGreaterBetter = target.isGreaterBetter();
@@ -28,137 +31,9 @@ public class TargetDecoyAnalysis {
         pepLevelFDRMap = getFDRMap(target.getPepScores(), decoy.getPepScores(), isGreaterBetter, pit);
     }
 
-//	public TargetDecoyPSMSet(
-//			File concatenatedFile, 
-//			String delimeter, 
-//			boolean hasHeader,
-//			int scoreCol, 
-//			boolean isGreaterBetter, 
-//			int specFileCol,			
-//			int specIndexCol, 
-//			int pepCol,
-//			ArrayList<Pair<Integer,ArrayList<String>>> reqStrList,
-//			int dbCol, String decoyPrefix)
-//	{
-//		target = new TSVPSMSet(concatenatedFile, delimeter, hasHeader, scoreCol, isGreaterBetter, specFileCol, specIndexCol, pepCol, reqStrList).decoy(dbCol, decoyPrefix, true).read();
-//		decoy = new TSVPSMSet(concatenatedFile, delimeter, hasHeader, scoreCol, isGreaterBetter, specFileCol, specIndexCol, pepCol, reqStrList).decoy(dbCol, decoyPrefix, false).read();
-//		this.isGreaterBetter = isGreaterBetter;
-//		isConcatenated = true;
-//		psmLevelFDRMap = getFDRMap(target.getPSMScores(), decoy.getPSMScores(), isGreaterBetter, isConcatenated, 1);
-//		pepLevelFDRMap = getFDRMap(target.getPepScores(), decoy.getPepScores(), isGreaterBetter, isConcatenated, 1);
-//	}
-//	
-//	public TargetDecoyPSMSet(
-//			File targetFile, 
-//			File decoyFile, 
-//			String delimeter, 
-//			boolean hasHeader,
-//			int scoreCol, 
-//			boolean isGreaterBetter, 
-//			int specFileCol,
-//			int specIndexCol, 
-//			int pepCol,
-//			ArrayList<Pair<Integer,ArrayList<String>>> reqStrListPSMSet,
-//			float pit
-//			)
-//	{
-//		target = new TSVPSMSet(targetFile, delimeter, hasHeader, scoreCol, isGreaterBetter, specFileCol, specIndexCol, pepCol, reqStrListPSMSet).read();
-//		decoy = new TSVPSMSet(decoyFile, delimeter, hasHeader, scoreCol, isGreaterBetter, specFileCol, specIndexCol, pepCol, reqStrListPSMSet).read();
-//		isConcatenated = false;
-//		psmLevelFDRMap = getFDRMap(target.getPSMScores(), decoy.getPSMScores(), isGreaterBetter, isConcatenated, pit);		
-//		pepLevelFDRMap = getFDRMap(target.getPepScores(), decoy.getPepScores(), isGreaterBetter, isConcatenated, pit);
-//	}
-
-    public PSMSet getTargetPSMSet() {
-        return target;
-    }
-
-    public PSMSet getDecoyPSMSet() {
-        return decoy;
-    }
-
-    public TreeMap<Float, Float> getPSMLevelFDRMap() {
-        return psmLevelFDRMap;
-    }
-
-    public TreeMap<Float, Float> getPepLevelFDRMap() {
-        return pepLevelFDRMap;
-    }
-
-    public float getPSMQValue(float score) {
-        float fdr;
-        if (isGreaterBetter)
-            fdr = psmLevelFDRMap.lowerEntry(score).getValue();
-        else
-            fdr = psmLevelFDRMap.higherEntry(score).getValue();
-        return fdr;
-    }
-
-    public float getPepFDR(float score) {
-        float fdr;
-        if (isGreaterBetter)
-            fdr = pepLevelFDRMap.lowerEntry(score).getValue();
-        else
-            fdr = pepLevelFDRMap.higherEntry(score).getValue();
-        return fdr;
-    }
-
-    public Float getPepQValueFromAnnotation(String annotation) {
-        String pep = TSVPSMSet.getPeptideFromAnnotation(annotation);
-
-        Float score = target.getPeptideScoreTable().get(pep);
-        if (score == null) {
-            score = decoy.getPeptideScoreTable().get(pep);
-            if (score == null)
-                return null;
-        }
-        return getPepFDR(score);
-    }
-
-    public Float getPepQValue(String pep) {
-        Float score = target.getPeptideScoreTable().get(pep);
-        if (score == null) {
-            score = decoy.getPeptideScoreTable().get(pep);
-            if (score == null)
-                return null;
-        }
-        return getPepFDR(score);
-    }
-
-    // returns threshold where FDR(t>threshold)<=fdrThreshold && FDR(t<=threshold)>fdrThreshold
-    public float getThresholdScore(float fdrThreshold, boolean isPeptideLevel) {
-        TreeMap<Float, Float> map;
-        if (!isPeptideLevel)
-            map = psmLevelFDRMap;    // PSMScore -> FDR
-        else
-            map = pepLevelFDRMap;
-
-        float threshold;
-        if (isGreaterBetter) {
-            threshold = Float.MAX_VALUE;
-            for (Entry<Float, Float> entry : map.descendingMap().entrySet()) {
-                if (entry.getValue() > fdrThreshold)
-                    break;
-                else
-                    threshold = entry.getKey();
-
-            }
-        } else {
-            threshold = Float.MIN_VALUE;
-
-            for (Entry<Float, Float> entry : map.entrySet()) {
-//				System.out.println(entry.getKey()+"\t"+entry.getValue());
-                if (entry.getValue() > fdrThreshold)
-                    break;
-                else
-                    threshold = entry.getKey();
-            }
-        }
-        return threshold;
-    }
-
     public static TreeMap<Float, Float> getFDRMap(ArrayList<Float> target, ArrayList<Float> decoy,
-                                                  boolean isGreaterBetter, float pit) {
+            boolean isGreaterBetter, float pit)
+    {
         TreeMap<Float, Float> fdrMap = new TreeMap<Float, Float>();
         if (!isGreaterBetter) {
             Collections.sort(target);
@@ -247,6 +122,103 @@ public class TargetDecoyAnalysis {
 //			finalFDRMap.put(Float.NEGATIVE_INFINITY, 0f);
 //		}
         return finalFDRMap;
+    }
+
+    public PSMSet getTargetPSMSet()
+    {
+        return target;
+    }
+
+    public PSMSet getDecoyPSMSet()
+    {
+        return decoy;
+    }
+
+    public TreeMap<Float, Float> getPSMLevelFDRMap()
+    {
+        return psmLevelFDRMap;
+    }
+
+    public TreeMap<Float, Float> getPepLevelFDRMap()
+    {
+        return pepLevelFDRMap;
+    }
+
+    public float getPSMQValue(float score)
+    {
+        float fdr;
+        if (isGreaterBetter)
+            fdr = psmLevelFDRMap.lowerEntry(score).getValue();
+        else
+            fdr = psmLevelFDRMap.higherEntry(score).getValue();
+        return fdr;
+    }
+
+    public float getPepFDR(float score)
+    {
+        float fdr;
+        if (isGreaterBetter)
+            fdr = pepLevelFDRMap.lowerEntry(score).getValue();
+        else
+            fdr = pepLevelFDRMap.higherEntry(score).getValue();
+        return fdr;
+    }
+
+    public Float getPepQValueFromAnnotation(String annotation)
+    {
+        String pep = TSVPSMSet.getPeptideFromAnnotation(annotation);
+
+        Float score = target.getPeptideScoreTable().get(pep);
+        if (score == null) {
+            score = decoy.getPeptideScoreTable().get(pep);
+            if (score == null)
+                return null;
+        }
+        return getPepFDR(score);
+    }
+
+    public Float getPepQValue(String pep)
+    {
+        Float score = target.getPeptideScoreTable().get(pep);
+        if (score == null) {
+            score = decoy.getPeptideScoreTable().get(pep);
+            if (score == null)
+                return null;
+        }
+        return getPepFDR(score);
+    }
+
+    // returns threshold where FDR(t>threshold)<=fdrThreshold && FDR(t<=threshold)>fdrThreshold
+    public float getThresholdScore(float fdrThreshold, boolean isPeptideLevel)
+    {
+        TreeMap<Float, Float> map;
+        if (!isPeptideLevel)
+            map = psmLevelFDRMap;    // PSMScore -> FDR
+        else
+            map = pepLevelFDRMap;
+
+        float threshold;
+        if (isGreaterBetter) {
+            threshold = Float.MAX_VALUE;
+            for (Entry<Float, Float> entry : map.descendingMap().entrySet()) {
+                if (entry.getValue() > fdrThreshold)
+                    break;
+                else
+                    threshold = entry.getKey();
+
+            }
+        } else {
+            threshold = Float.MIN_VALUE;
+
+            for (Entry<Float, Float> entry : map.entrySet()) {
+//				System.out.println(entry.getKey()+"\t"+entry.getValue());
+                if (entry.getValue() > fdrThreshold)
+                    break;
+                else
+                    threshold = entry.getKey();
+            }
+        }
+        return threshold;
     }
 
 }

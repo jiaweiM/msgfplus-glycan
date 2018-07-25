@@ -15,16 +15,16 @@ import java.util.Set;
 import org.junit.Ignore;
 import org.junit.Test;
 
-import edu.ucsd.msjava.ipa.IPA;
-import edu.ucsd.msjava.ipa.MS1SpectraMap;
-import edu.ucsd.msjava.msgf.Tolerance;
-import edu.ucsd.msjava.msutil.Pair;
-import edu.ucsd.msjava.msutil.SpectraAccessor;
-import edu.ucsd.msjava.msutil.Spectrum;
-import edu.ucsd.msjava.params.ParamManager;
-import edu.ucsd.msjava.parser.BufferedLineReader;
-import edu.ucsd.msjava.parser.TSVResultParser;
-import edu.ucsd.msjava.ui.MSGFPlus;
+import omics.msgf.ipa.IPA;
+import omics.msgf.ipa.MS1SpectraMap;
+import omics.msgf.msgf.Tolerance;
+import omics.msgf.msutil.Pair;
+import omics.msgf.msutil.SpectraAccessor;
+import omics.msgf.msutil.Spectrum;
+import omics.msgf.params.ParamManager;
+import omics.msgf.parser.BufferedLineReader;
+import omics.msgf.parser.TSVResultParser;
+import omics.msgf.ui.MSGFPlus;
 
 public class TestIPA {
 

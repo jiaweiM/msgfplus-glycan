@@ -5,8 +5,8 @@ import java.io.File;
 import org.junit.Ignore;
 import org.junit.Test;
 
-import edu.ucsd.msjava.fdr.ComputeFDR;
-import edu.ucsd.msjava.fdr.ComputeQValue;
+import omics.msgf.fdr.ComputeFDR;
+import omics.msgf.fdr.ComputeQValue;
 
 public class TestFDR {
     @Test

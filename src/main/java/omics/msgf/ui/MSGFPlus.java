@@ -9,7 +9,7 @@ import omics.msgf.msutil.*;
 import omics.msgf.mzid.MZIdentMLGen;
 import omics.msgf.mzml.MzMLAdapter;
 import omics.msgf.params.ParamManager;
-import omics.msgf.sequences.Constants;
+import omics.msgf.sequences.DBConstants;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -22,7 +22,7 @@ import java.util.logging.Logger;
 public class MSGFPlus
 {
     public static final String VERSION = "Release (v2018.06.22)";
-    public static final String RELEASE_DATE = "9 April 2018";
+    public static final String RELEASE_DATE = "22 April 2018";
 
     public static final String DECOY_DB_EXTENSION = ".revCat.fasta";
     public static final String DECOY_PROTEIN_PREFIX = "XXX";
@@ -68,6 +68,12 @@ public class MSGFPlus
             System.out.format("MS-GF+ complete (total elapsed time: %.2f sec)\n", (System.currentTimeMillis() - time) / (float) 1000);
     }
 
+    /**
+     * Run MS-GF plus with given {@link ParamManager}
+     *
+     * @param paramManager {@link ParamManager} contains all required parameter.
+     * @return error message.
+     */
     public static String runMSGFPlus(ParamManager paramManager)
     {
         SearchParams params = new SearchParams();
@@ -113,6 +119,15 @@ public class MSGFPlus
         return null;
     }
 
+    /**
+     * run a single MS-GF instance.
+     *
+     * @param ioIndex    io file index
+     * @param specFormat {@link SpecFileFormat}
+     * @param outputFile output file
+     * @param params     search parameters
+     * @return error information
+     */
     private static String runMSGFPlus(int ioIndex, SpecFileFormat specFormat, File outputFile, SearchParams params)
     {
         long time = System.currentTimeMillis();
@@ -156,9 +171,9 @@ public class MSGFPlus
         if (minNumPeaksPerSpectrum == -1)    // not specified
         {
             if (instType == InstrumentType.TOF)
-                minNumPeaksPerSpectrum = omics.msgf.sequences.Constants.MIN_NUM_PEAKS_PER_SPECTRUM_TOF;
+                minNumPeaksPerSpectrum = DBConstants.MIN_NUM_PEAKS_PER_SPECTRUM_TOF;
             else
-                minNumPeaksPerSpectrum = Constants.MIN_NUM_PEAKS_PER_SPECTRUM;
+                minNumPeaksPerSpectrum = DBConstants.MIN_NUM_PEAKS_PER_SPECTRUM;
         }
 
         System.out.println("Loading database files...");
@@ -181,7 +196,7 @@ public class MSGFPlus
             File concatTargetDecoyDBFile = new File(databaseFile.getAbsoluteFile().getParent() + File.separator + concatDBFileName);
             if (!concatTargetDecoyDBFile.exists()) {
                 System.out.println("Creating " + concatTargetDecoyDBFile.getPath() + ".");
-                if (ReverseDB.reverseDB(databaseFile.getPath(), concatTargetDecoyDBFile.getPath(), true, DECOY_PROTEIN_PREFIX) == false) {
+                if (!ReverseDB.reverseDB(databaseFile.getPath(), concatTargetDecoyDBFile.getPath(), true, DECOY_PROTEIN_PREFIX)) {
                     return "Cannot create a decoy database file!";
                 }
             }
@@ -247,7 +262,8 @@ public class MSGFPlus
 
         NewScorerFactory.SpecDataType specDataType = new NewScorerFactory.SpecDataType(activationMethod, instType, enzyme, protocol);
 
-        List<MSGFPlusMatch> resultList = Collections.synchronizedList(new ArrayList<MSGFPlusMatch>());
+        // results
+        List<MSGFPlusMatch> resultList = Collections.synchronizedList(new ArrayList<>());
 
         int toIndexGlobal = specSize;
         while (toIndexGlobal < specSize) {
@@ -323,8 +339,7 @@ public class MSGFPlus
                         maxIsotopeError,
                         specDataType,
                         params.outputAdditionalFeatures(),
-                        false
-                );
+                        false);
                 if (doNotUseEdgeScore)
                     specScanner.turnOffEdgeScoring();
 
@@ -333,8 +348,7 @@ public class MSGFPlus
                         sa,
                         params,
                         resultList,
-                        i + 1
-                );
+                        i + 1);
                 executor.execute(msgfdbExecutor);
             }
             // Output initial progress report.
@@ -353,7 +367,6 @@ public class MSGFPlus
 
             // Output completed progress report.
             executor.outputProgressReport();
-
         } catch (OutOfMemoryError ex) {
             ex.printStackTrace();
             Logger.getLogger(MSGFPlus.class.getName()).log(Level.SEVERE, null, ex);

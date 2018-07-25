@@ -10,19 +10,19 @@ import java.util.Iterator;
 import org.junit.Ignore;
 import org.junit.Test;
 
-import edu.ucsd.msjava.msgf.Histogram;
-import edu.ucsd.msjava.msutil.AminoAcidSet;
-import edu.ucsd.msjava.msutil.IonType;
-import edu.ucsd.msjava.msutil.Peak;
-import edu.ucsd.msjava.msutil.Peptide;
-import edu.ucsd.msjava.msutil.SpectraAccessor;
-import edu.ucsd.msjava.msutil.Spectrum;
-import edu.ucsd.msjava.mzid.MzIDTest;
-import edu.ucsd.msjava.mzml.MzMLAdapter;
-import edu.ucsd.msjava.params.ParamManager;
-import edu.ucsd.msjava.parser.BufferedLineReader;
-import edu.ucsd.msjava.ui.MSGFPlus;
-import edu.ucsd.msjava.ui.ScoringParamGen;
+import omics.msgf.msgf.Histogram;
+import omics.msgf.msutil.AminoAcidSet;
+import omics.msgf.msutil.IonType;
+import omics.msgf.msutil.Peak;
+import omics.msgf.msutil.Peptide;
+import omics.msgf.msutil.SpectraAccessor;
+import omics.msgf.msutil.Spectrum;
+import omics.msgf.mzid.MzIDTest;
+import omics.msgf.mzml.MzMLAdapter;
+import omics.msgf.params.ParamManager;
+import omics.msgf.parser.BufferedLineReader;
+import omics.msgf.ui.MSGFPlus;
+import omics.msgf.ui.ScoringParamGen;
 
 public class TestMSGFPlus {
     
@@ -225,7 +225,7 @@ public class TestMSGFPlus {
         
         String[] argv = {"-i", resultPath.getPath(), "-d", specPath.getPath(), "-m", "2", "-inst", "1", "-e", "0", "-protocol", "3"};
         ParamManager paramManager = new ParamManager("ScoringParamGen", String.valueOf(ScoringParamGen.VERSION), ScoringParamGen.DATE,
-                "java -Xmx2000M -cp MSGFPlus.jar edu.ucsd.msjava.ui.ScoringParamGen");
+                "java -Xmx2000M -cp MSGFPlus.jar omics.msgf.ui.ScoringParamGen");
         MzMLAdapter.turnOffLogs();
         paramManager.addScoringParamGenParams();
         paramManager.parseParams(argv);
@@ -427,7 +427,7 @@ public class TestMSGFPlus {
         
         String[] argv = {"-i", resultPath.getPath(), "-d", specPath.getPath(), "-m", "1", "-inst", "0", "-e", "1"};
         ParamManager paramManager = new ParamManager("ScoringParamGen", String.valueOf(ScoringParamGen.VERSION), ScoringParamGen.DATE,
-                "java -Xmx2000M -cp MSGFPlus.jar edu.ucsd.msjava.ui.ScoringParamGen");
+                "java -Xmx2000M -cp MSGFPlus.jar omics.msgf.ui.ScoringParamGen");
         MzMLAdapter.turnOffLogs();
         paramManager.addScoringParamGenParams();
         paramManager.parseParams(argv);

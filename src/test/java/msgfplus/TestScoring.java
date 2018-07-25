@@ -7,16 +7,16 @@ import java.nio.file.Paths;
 import java.util.HashSet;
 import java.util.Iterator;
 
-import edu.ucsd.msjava.msutil.*;
+import omics.msgf.msutil.*;
 import org.junit.Ignore;
 import org.junit.Test;
 
-import edu.ucsd.msjava.msscorer.NewRankScorer;
-import edu.ucsd.msjava.msscorer.ScoringParameterGeneratorWithErrors;
-import edu.ucsd.msjava.msscorer.NewScorerFactory.SpecDataType;
-import edu.ucsd.msjava.mzml.MzMLAdapter;
-import edu.ucsd.msjava.params.ParamManager;
-import edu.ucsd.msjava.ui.ScoringParamGen;
+import omics.msgf.msscorer.NewRankScorer;
+import omics.msgf.msscorer.ScoringParameterGeneratorWithErrors;
+import omics.msgf.msscorer.NewScorerFactory.SpecDataType;
+import omics.msgf.mzml.MzMLAdapter;
+import omics.msgf.params.ParamManager;
+import omics.msgf.ui.ScoringParamGen;
 
 
 public class TestScoring {
@@ -52,7 +52,7 @@ public class TestScoring {
                 };
         
         ParamManager paramManager = new ParamManager("ScoringParamGen", "Test", "Test",
-                "java -Xmx2000M -cp MSGFPlus.jar edu.ucsd.msjava.ui.ScoringParamGen");
+                "java -Xmx2000M -cp MSGFPlus.jar omics.msgf.ui.ScoringParamGen");
             
         MzMLAdapter.turnOffLogs();
         paramManager.addScoringParamGenParams();

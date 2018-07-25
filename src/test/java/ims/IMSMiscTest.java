@@ -2,10 +2,10 @@ package ims;
 
 import java.io.*;
 import org.junit.Test;
-import edu.ucsd.msjava.msdbsearch.PeptideEnumerator;
-import edu.ucsd.msjava.msutil.SpectraAccessor;
-import edu.ucsd.msjava.msutil.Spectrum;
-import edu.ucsd.msjava.msutil.WindowFilter;
+import omics.msgf.msdbsearch.PeptideEnumerator;
+import omics.msgf.msutil.SpectraAccessor;
+import omics.msgf.msutil.Spectrum;
+import omics.msgf.msutil.WindowFilter;
 
 public class IMSMiscTest {
 

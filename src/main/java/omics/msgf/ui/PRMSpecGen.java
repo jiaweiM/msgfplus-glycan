@@ -6,7 +6,7 @@ import omics.msgf.msscorer.NewScoredSpectrum;
 import omics.msgf.msscorer.NewScorerFactory;
 import omics.msgf.msutil.*;
 import omics.msgf.parser.*;
-import omics.msgf.sequences.Constants;
+import omics.msgf.sequences.DBConstants;
 
 import java.io.*;
 import java.util.Iterator;
@@ -232,7 +232,7 @@ public class PRMSpecGen
                 System.out.format("Processing spectra... %.4f", (numSpecs * 100 / (float) totalNumSpecs));
                 System.out.println("% done.");
             }
-            if (spec.size() < Constants.MIN_NUM_PEAKS_PER_SPECTRUM) {
+            if (spec.size() < DBConstants.MIN_NUM_PEAKS_PER_SPECTRUM) {
                 System.out.println("Spectrum " + spec.getSpecIndex() + " has too few peaks (#Peaks: " + spec.size() + "): ignored.");
                 continue;
             }

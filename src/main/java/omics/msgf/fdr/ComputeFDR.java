@@ -130,10 +130,10 @@ public class ComputeFDR
                     printUsageAndExit("Invalid matchCol: " + argv[i + 1]);
                 }
                 String[] token = argv[i + 2].split(",");
-                ArrayList<String> reqStrOrList = new ArrayList<String>();
+                ArrayList<String> reqStrOrList = new ArrayList<>();
                 for (String s : token)
                     reqStrOrList.add(s);
-                reqStrList.add(new Pair<Integer, ArrayList<String>>(matchCol, reqStrOrList));
+                reqStrList.add(new Pair<>(matchCol, reqStrOrList));
                 i += 3;
             } else if (argv[i].equalsIgnoreCase("-fdr")) {
                 if (i + 1 >= argv.length)
@@ -237,10 +237,18 @@ public class ComputeFDR
             out.close();
     }
 
+    /**
+     * Calculate the Qvalus for the result PSM list.
+     *
+     * @param resultList            {@link MSGFPlusMatch} list
+     * @param sa                    {@link CompactSuffixArray} of the database
+     * @param considerBestMatchOnly true if only consider the best match for each spectrum.
+     */
     public static void addQValues(List<MSGFPlusMatch> resultList, CompactSuffixArray sa, boolean considerBestMatchOnly)
     {
         MSGFPlusPSMSet target = new MSGFPlusPSMSet(resultList, false, sa).setConsiderBestMatchOnly(considerBestMatchOnly);
         target.read();
+
         MSGFPlusPSMSet decoy = new MSGFPlusPSMSet(resultList, true, sa).setConsiderBestMatchOnly(considerBestMatchOnly);
         decoy.read();
 
@@ -249,7 +257,7 @@ public class ComputeFDR
         for (MSGFPlusMatch match : resultList) {
             List<DatabaseMatch> dbMatchList;
             if (considerBestMatchOnly) {
-                dbMatchList = new ArrayList<DatabaseMatch>();
+                dbMatchList = new ArrayList<>();
                 dbMatchList.add(match.getBestDBMatch());
             } else
                 dbMatchList = match.getMatchList();
@@ -261,7 +269,6 @@ public class ComputeFDR
                 m.setPSMQValue(psmQValue);
                 m.setPepQValue(pepQValue);
             }
-
         }
     }
 }

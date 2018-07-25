@@ -11,13 +11,19 @@ import java.util.List;
 
 public class MSGFPlusPSMSet extends PSMSet
 {
-
     private final List<MSGFPlusMatch> msgfPlusPSMList;
     private final boolean isDecoy;
     private final CompactSuffixArray sa;
 
     private boolean considerBestMatchOnly = false;
 
+    /**
+     * Construct with MSGFPlusMatch list.
+     *
+     * @param msgfPlusPSMList total PSMList, including target and decoy matches.
+     * @param isDecoy         true if this PSMSet is decoy
+     * @param sa              {@link CompactSuffixArray}
+     */
     public MSGFPlusPSMSet(List<MSGFPlusMatch> msgfPlusPSMList, boolean isDecoy, CompactSuffixArray sa)
     {
         this.msgfPlusPSMList = msgfPlusPSMList;
@@ -37,17 +43,19 @@ public class MSGFPlusPSMSet extends PSMSet
         return false;
     }
 
-    // set-up 	ArrayList<ScoredString> psmList and HashMap<String,Float> peptideScoreTable
+    /**
+     * Get corresponding PSM list from the total PSM list.
+     */
     @Override
     public void read()
     {
-        psmList = new ArrayList<ScoredString>();
-        peptideScoreTable = new HashMap<String, Float>();
+        psmList = new ArrayList<>();
+        peptideScoreTable = new HashMap<>();
 
         for (MSGFPlusMatch match : msgfPlusPSMList) {
             List<DatabaseMatch> dbMatchList;
             if (considerBestMatchOnly) {
-                dbMatchList = new ArrayList<DatabaseMatch>();
+                dbMatchList = new ArrayList<>();
                 dbMatchList.add(match.getBestDBMatch());
             } else
                 dbMatchList = match.getMatchList();
@@ -69,6 +77,7 @@ public class MSGFPlusPSMSet extends PSMSet
 
                 float specEValue = (float) m.getSpecEValue();
                 psmList.add(new ScoredString(pepSeq, specEValue));
+
                 Float prevSpecEValue = peptideScoreTable.get(pepSeq);
                 if (prevSpecEValue == null || specEValue < prevSpecEValue)
                     peptideScoreTable.put(pepSeq, specEValue);

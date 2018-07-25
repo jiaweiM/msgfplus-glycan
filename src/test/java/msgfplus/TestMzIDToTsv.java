@@ -10,13 +10,13 @@ import java.util.List;
 import org.junit.Ignore;
 import org.junit.Test;
 
-import edu.ucsd.msjava.msutil.AminoAcidSet;
-import edu.ucsd.msjava.msutil.Composition;
-import edu.ucsd.msjava.msutil.Peptide;
-import edu.ucsd.msjava.mzid.Unimod;
-import edu.ucsd.msjava.mzid.UnimodComposition;
-import edu.ucsd.msjava.parser.TSVParser;
-import edu.ucsd.msjava.ui.MzIDToTsv;
+import omics.msgf.msutil.AminoAcidSet;
+import omics.msgf.msutil.Composition;
+import omics.msgf.msutil.Peptide;
+import omics.msgf.mzid.Unimod;
+import omics.msgf.mzid.UnimodComposition;
+import omics.msgf.parser.TSVParser;
+import omics.msgf.ui.MzIDToTsv;
 
 public class TestMzIDToTsv {
 

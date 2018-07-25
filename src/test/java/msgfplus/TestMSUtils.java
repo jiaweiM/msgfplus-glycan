@@ -3,8 +3,8 @@ package msgfplus;
 import java.io.File;
 import java.net.URISyntaxException;
 import org.junit.Test;
-import edu.ucsd.msjava.msutil.AminoAcidSet;
-import edu.ucsd.msjava.msutil.IonType;
+import omics.msgf.msutil.AminoAcidSet;
+import omics.msgf.msutil.IonType;
 
 public class TestMSUtils {
 

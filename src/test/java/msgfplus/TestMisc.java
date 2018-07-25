@@ -4,28 +4,28 @@ import java.io.*;
 import java.net.URISyntaxException;
 import java.util.*;
 
-import edu.ucsd.msjava.msdbsearch.CompactFastaSequence;
-import edu.ucsd.msjava.msdbsearch.ReverseDB;
-import edu.ucsd.msjava.ui.MSGFPlus;
+import omics.msgf.msdbsearch.CompactFastaSequence;
+import omics.msgf.msdbsearch.ReverseDB;
+import omics.msgf.ui.MSGFPlus;
 import org.junit.Ignore;
 import org.junit.Test;
 
-import edu.ucsd.msjava.misc.ConvertToMgf;
-import edu.ucsd.msjava.misc.VennDiagram;
-import edu.ucsd.msjava.msgf.NominalMass;
-import edu.ucsd.msjava.msscorer.NewRankScorer;
-import edu.ucsd.msjava.msscorer.NewScoredSpectrum;
-import edu.ucsd.msjava.msscorer.NewScorerFactory;
-import edu.ucsd.msjava.msutil.ActivationMethod;
-import edu.ucsd.msjava.msutil.AminoAcidSet;
-import edu.ucsd.msjava.msutil.Composition;
-import edu.ucsd.msjava.msutil.Enzyme;
-import edu.ucsd.msjava.msutil.InstrumentType;
-import edu.ucsd.msjava.msutil.Peptide;
-import edu.ucsd.msjava.msutil.Protocol;
-import edu.ucsd.msjava.msutil.SpectraAccessor;
-import edu.ucsd.msjava.msutil.Spectrum;
-import edu.ucsd.msjava.parser.TSVParser;
+import omics.msgf.misc.ConvertToMgf;
+import omics.msgf.misc.VennDiagram;
+import omics.msgf.msgf.NominalMass;
+import omics.msgf.msscorer.NewRankScorer;
+import omics.msgf.msscorer.NewScoredSpectrum;
+import omics.msgf.msscorer.NewScorerFactory;
+import omics.msgf.msutil.ActivationMethod;
+import omics.msgf.msutil.AminoAcidSet;
+import omics.msgf.msutil.Composition;
+import omics.msgf.msutil.Enzyme;
+import omics.msgf.msutil.InstrumentType;
+import omics.msgf.msutil.Peptide;
+import omics.msgf.msutil.Protocol;
+import omics.msgf.msutil.SpectraAccessor;
+import omics.msgf.msutil.Spectrum;
+import omics.msgf.parser.TSVParser;
 
 public class TestMisc {
 

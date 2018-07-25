@@ -8,7 +8,7 @@ import java.io.PrintStream;
 import org.junit.Ignore;
 import org.junit.Test;
 
-import edu.ucsd.msjava.parser.BufferedLineReader;
+import omics.msgf.parser.BufferedLineReader;
 public class IMSResultProcessor {
 
 	@Test

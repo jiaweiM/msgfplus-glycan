@@ -3,7 +3,7 @@ package ims;
 import java.io.File;
 
 import org.junit.Test;
-import edu.ucsd.msjava.msdbsearch.PeptideEnumerator;
+import omics.msgf.msdbsearch.PeptideEnumerator;
 
 public class SarcTest {
 	@Test
